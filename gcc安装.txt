@@ -1,0 +1,10 @@
+[root@xdl-lamp-lnmp tools]# mwget -n 20 ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-8.2.0/gcc-8.2.0.tar.gz
+[root@xdl-lamp-lnmp tools]# tar -zxf gcc-8.2.0.tar.gz 
+[root@xdl-lamp-lnmp tools]# cd gcc-8.2.0
+#在gcc目录下的contrib目录中有一个特殊的文件会帮我们将所有依赖包都安装好。
+[root@xdl-lamp-lnmp gcc-8.2.0]# ./contrib/download_prerequisites
+#下面查询到gcc是在/usr/bin/gcc目录，其实这里的gcc是安装在/usr目录中，所以这里我们指定的gcc安装位置是/usr，如果我们将gcc安装到非原来的目录，那么安装完成之后需要将很多旧版本的gcc位置上做软连接到新版本gcc上。比如gcc位置，g++位置，lib64库文件，c++库文件
+[root@xdl-lamp-lnmp ~]# which gcc
+/usr/bin/gcc
+[root@xdl-lamp-lnmp gcc-8.2.0]# ./configure --prefix=/usr --enable-threads=posix --disable-checking --disable-multilib --enable-languages=c,c++
+[root@xdl-lamp-lnmp gcc-8.2.0]# make && make install
